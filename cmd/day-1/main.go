@@ -10,6 +10,11 @@ import (
 
 const day = 1
 
+var parts = map[string]solutionFn{
+	"part1": solutions.Part1,
+	"part2": solutions.Part2,
+}
+
 type solutionFn = func([]string) []byte
 
 func main() {
@@ -20,11 +25,6 @@ func main() {
 	}
 
 	part := os.Args[1]
-
-	parts := map[string]solutionFn{
-		"part1": solutions.Part1,
-		"part2": solutions.Part2,
-	}
 
 	output := parts[part](input)
 
