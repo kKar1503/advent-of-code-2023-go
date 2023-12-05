@@ -11,8 +11,9 @@ import (
 const day = 5
 
 var parts = map[string]solutionFn{
-	"part1": solutions.Part1,
-	"part2": solutions.Part2,
+	"part1":   solutions.Part1,
+	"part1v2": solutions.Part1V2,
+	"part2":   solutions.Part2,
 }
 
 type solutionFn = func([]string) []byte
