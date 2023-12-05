@@ -1,6 +1,7 @@
 package solutions
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -38,6 +39,7 @@ func inputToMaps(input []string) (seeds []int, mappings map[string]ConversionMap
 			Dst: split[1],
 		}
 
+		fmt.Printf("conversionMap: %v\n", conversionMap)
 		mappingArr := []string{}
 
 		for {
@@ -58,6 +60,7 @@ func inputToMaps(input []string) (seeds []int, mappings map[string]ConversionMap
 }
 
 func createMap(m []string) map[int]int {
+	fmt.Println("creating map...")
 	output := map[int]int{}
 	for _, line := range m {
 		split := strings.Split(line, " ")
@@ -66,6 +69,7 @@ func createMap(m []string) map[int]int {
 		ran, _ := strconv.Atoi(split[2])
 
 		for i := 0; i < ran; i++ {
+			fmt.Printf("mapping %d to %d\n", src+i, dst+i)
 			output[src+i] = dst + i
 		}
 	}
