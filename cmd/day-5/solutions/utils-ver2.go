@@ -23,7 +23,11 @@ func inputToMapsV2(
 	partNumber int,
 ) (seeds []int, mappings map[string]ConversionMapV2) {
 	// First line is the seeds:
+	if partNumber == 1 {
 		seeds = getSeedPart1(input[0])
+	} else {
+		seeds = getSeedPart2(input[0])
+	}
 
 	mappings = map[string]ConversionMapV2{}
 
@@ -73,6 +77,32 @@ func getSeedPart1(s string) []int {
 
 	return seeds
 }
+
+func getSeedPart2(s string) []int {
+	seedsStr := strings.Split(strings.TrimPrefix(s, "seeds: "), " ")
+	seedsArr := make([][]int, len(seedsStr)/2)
+	length := 0
+	for i := 0; i < len(seedsStr); i += 2 {
+		seedStart, _ := strconv.Atoi(seedsStr[i])
+		seedRange, _ := strconv.Atoi(seedsStr[i+1])
+		seeds := make([]int, seedRange)
+		fmt.Printf("making []int size %d, from %d\n", seedRange, seedStart)
+		for j := 0; j < seedRange; j++ {
+			seeds[j] = seedStart + j
+		}
+		seedsArr[i/2] = seeds
+		length += seedRange
+	}
+
+	seeds := make([]int, length)
+
+	k := 0
+	for l, s := range seedsArr {
+		fmt.Printf("copying l: %v\n", l)
+		k += copy(seeds[k:], s)
+	}
+
+	fmt.Printf("len(seeds): %d\n", len(seeds))
 
 	return seeds
 }
